@@ -2,6 +2,10 @@ class Solution {
     public int minDistance(String word1, String word2) {
         //recursion 
         //int ans = rec(word1, word2);
+        
+        //memoization
+        int memo[][] = new int[word1.length()+1][word2.length()+1];
+        int ans  = memo(word1, word2, memo);
         return ans;
     }
     
@@ -27,13 +31,18 @@ class Solution {
         
     }
     
-
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     //memoization
     public static int memo(String s, String t, int arr[][]){
