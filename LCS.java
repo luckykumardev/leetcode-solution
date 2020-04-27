@@ -21,17 +21,18 @@ class Solution {
          }
 
         if(s.charAt(0)  == t.charAt(0)){
-            memo[s.length()][t.length()]  =1 + longestCommonSubsequence(s.substring(1), t.substring(1)); 
+            memo[s.length()][t.length()]  =1 + longestCommonSubsequence(s.substring(1), t.substring(1), memo); 
              return memo[s.length()][t.length()];
         }else{
             
-            int op1 = longestCommonSubsequence(s, t.substring(1));
-            int op2 = longestCommonSubsequence(s.substring(1), t);
-            memo[s.length()][t.length()] = Math.max(op1, op2));
+            int op1 = longestCommonSubsequence(s, t.substring(1), memo);
+            int op2 = longestCommonSubsequence(s.substring(1), t, memo);
+            memo[s.length()][t.length()] = Math.max(op1, op2);
            return   memo[s.length()][t.length()];
         }
 
     }
+    
     public int longestCommonSubsequenceDP(String s, String t)   {
         int m = s.length();
         int n = t.length();
@@ -49,7 +50,6 @@ class Solution {
         
         return dp[m][n];
     }
-    
     
 }
 
