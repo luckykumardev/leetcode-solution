@@ -3,12 +3,12 @@ public class Solution extends VersionControl {
         int left = 1, right = n;
         int ans = -1;
         while (left <= right) {
-            int mid = left + (right - left) / 2; // to avoid overflow
+            int mid = left + (right - left) / 2;
             if (isBadVersion(mid)) {
-                ans = mid; // record mid as current answer
-                right = mid - 1; // try to find in the left side
+                ans = mid; 
+                right = mid - 1;
             } else {
-                left = mid + 1; // try to find in the right side
+                left = mid + 1; 
             }
         }
         return ans;
