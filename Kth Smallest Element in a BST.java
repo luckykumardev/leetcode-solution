@@ -1,19 +1,22 @@
 class Solution {
+    int count =0;
+    int out=0;
     public int kthSmallest(TreeNode root, int k) {
-        int count = countNodes(root.left);
-        if (count == k - 1) {
-            return root.val;
-        }
-        if (count > k - 1) {
-            return kthSmallest(root.left, k);
-        } else {
-            return kthSmallest(root.right, k - count - 1);
-        }
+        recur(root, k);
+        return out;
     }
-    int countNodes(TreeNode root) {
-        if (root == null) {
-            return 0;
+    
+    public void recur(TreeNode node, int k){
+        if(node.left != null){
+            recur(node.left, k);
         }
-        return 1 + countNodes(root.left) + countNodes(root.right);
+        count++;
+        if(count == k){
+            out = node.val;
+            return;
+        }
+        if(node.right != null){
+            recur(node.right, k);
+        }
     }
 }
