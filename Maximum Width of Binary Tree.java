@@ -2,23 +2,23 @@ class Solution {
     public int widthOfBinaryTree(TreeNode root) {
         if(root == null) return 0;
         
-        Deque<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
+        Deque<TreeNode> dq = new LinkedList<>();
+        dq.add(root);
         
         int max = 1;
-        while(!queue.isEmpty()) {
-            while(!queue.isEmpty() && queue.getFirst() == null )    queue.removeFirst();
-            while(!queue.isEmpty() && queue.getLast() == null )    queue.removeLast();
-            max = Math.max(max, queue.size());
-            int size = queue.size();
+        while(!dq.isEmpty()) {
+            while(!dq.isEmpty() && dq.getFirst() == null )    dq.removeFirst();
+            while(!dq.isEmpty() && dq.getLast() == null )    dq.removeLast();
+            max = Math.max(max, dq.size());
+            int size = dq.size();
             for(int i =0; i <size; i++) {
-                TreeNode temp = queue.poll();
+                TreeNode temp = dq.poll();
                 if(temp == null) {
-                    queue.offer(null);
-                    queue.offer(null);
+                    dq.add(null);
+                    dq.add(null);
                 } else {
-                    queue.offer(temp.left);
-                    queue.offer(temp.right);
+                    dq.add(temp.left);
+                    dq.add(temp.right);
                 }
                 
             }
