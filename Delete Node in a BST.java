@@ -1,30 +1,35 @@
 class Solution {
-    public TreeNode deleteNode(TreeNode root, int key) {
-        ArrayList<Integer> list = new ArrayList<>();
-        helper(list, root, key);	        
-	    return buildTree(list, 0, list.size() - 1, null);
-    }   
-
-    public static void helper(ArrayList<Integer> list, TreeNode root, int key){
-        if(root == null) return;
-        helper(list, root.left, key);
-        if(root.val  != key) list.add(root.val);
-        helper(list, root.right, key);
-    }
-
-    TreeNode buildTree(ArrayList<Integer> list, int start, int end, TreeNode node)  
-    {   
-        if (start > end) 
-            return null; 
-         
-        int mid=(start+((end-start)/2)); 
-        node = new TreeNode(list.get(mid)); 
-    
-        if (start == end) 
-            return node; 
+       public TreeNode deleteNode(TreeNode root, int key) {
+        if(root == null) return null;
         
-        node.left = buildTree(list, start, mid - 1, node.left); 
-        node.right = buildTree(list, mid + 1, end, node.right); 
-        return node; 
-    }     
+        if(root.val < key){
+            root.right = deleteNode(root.right, key);
+        }else if(root.val > key){
+            root.left = deleteNode(root.left, key);
+        }else{
+            if(root.left != null && root.right != null){
+                int v = findmax(root.left, Integer.MIN_VALUE);
+                root.val = v;
+                root.left = deleteNode(root.left, v);
+                return root;
+            }else if(root.left != null){
+                return root.left;
+            }else if(root.right != null){
+                return root.right;
+            }else{
+                return null;
+            }
+            
+        }
+        return root;
+    }
+    
+    
+    private static int findmax(TreeNode root, int max){
+       while(root !=null){
+           max = Math.max(max, root.val);
+           root = root.right;
+       }
+        return max;
+    }
 }
